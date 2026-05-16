@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Қора Қути — Раҳбарлар учун китоб</title>
+  <meta name="description" content="Қора Қути — раҳбар ва ходимлар ўртасидаги кўринмас муаммоларни очиб берадиган китоб. 240 000 сўм." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #111;
+      --white: #fff;
+      --cream: #FAFAF8;
+      --gold: #D9A400;
+      --gold-lt: #F5B800;
+      --gray: #F4F4F2;
+      --border: #E8E8E4;
+      --muted: #666660;
+      --danger: #C0392B;
+      --danger-bg: #FDF2F2;
+      --danger-bd: #F5C6C2;
+      --font: 'Manrope', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--white);
+      color: var(--black);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { max-width: 1060px; margin: 0 auto; padding: 0 20px; }
+    section { padding: 72px 0; }
+
+    /* HEADER */
+    .hdr {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+    }
+    .hdr .container { display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-size: 16px; font-weight: 800; text-decoration: none; color: var(--black); }
+    .logo span { color: var(--gold); }
+
+    /* BUTTONS */
+    @keyframes glow {
+      0%,100% { box-shadow: 0 0 0 0 rgba(245,184,0,.5), 0 6px 24px rgba(0,0,0,.2); }
+      50%      { box-shadow: 0 0 0 8px rgba(245,184,0,0), 0 6px 24px rgba(0,0,0,.2); }
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      font-family: var(--font); font-weight: 800; font-size: 15px;
+      padding: 15px 28px; border-radius: 12px; border: none; cursor: pointer;
+      text-decoration: none; transition: transform .18s, box-shadow .18s;
+      letter-spacing: .3px;
+    }
+    .btn-dark {
+      background: var(--black); color: var(--white);
+      box-shadow: 0 4px 20px rgba(0,0,0,.25);
+    }
+    .btn-dark:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,.3); }
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold-lt), var(--gold));
+      color: var(--black);
+      animation: glow 2.8s ease-in-out infinite;
+    }
+    .btn-gold:hover { transform: translateY(-2px); }
+    .btn-white { background: var(--white); color: var(--black); box-shadow: 0 4px 20px rgba(255,255,255,.15); }
+    .btn-white:hover { background: var(--gold-lt); }
+    .btn-lg { font-size: 17px; padding: 18px 36px; border-radius: 14px; }
+    .btn-full { width: 100%; }
+    .arr { font-size: 17px; transition: transform .18s; }
+    .btn:hover .arr { transform: translateX(4px); }
+
+    /* LABELS */
+    .label {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 12px;
+    }
+    .badge-trust {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--gold-lt); color: var(--black);
+      font-size: 12px; font-weight: 700; padding: 5px 12px;
+      border-radius: 100px; margin-bottom: 8px;
+    }
+    .badge-warn {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--danger-bg); border: 1.5px solid var(--danger-bd);
+      color: var(--danger); font-size: 12px; font-weight: 700;
+      padding: 5px 12px; border-radius: 100px; margin-bottom: 16px;
+    }
+    .warn-box {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: var(--danger-bg); border: 1.5px solid var(--danger-bd);
+      border-radius: 10px; padding: 14px 16px; text-align: left;
+    }
+    .warn-box strong { display: block; font-size: 13px; font-weight: 800; color: var(--danger); }
+    .warn-box span   { font-size: 13px; color: #7B2020; line-height: 1.5; }
+
+    /* HERO */
+    #hero { background: var(--cream); padding: 60px 0 72px; overflow: hidden; }
+    .hero-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 56px; align-items: center;
+    }
+    .hero-h1 {
+      font-size: clamp(24px, 3.5vw, 42px); font-weight: 800;
+      line-height: 1.18; letter-spacing: -1px; margin-bottom: 18px;
+    }
+    .hero-h1 em { font-style: normal; color: var(--gold); }
+    .hero-sub { font-size: 16px; color: #444; line-height: 1.7; margin-bottom: 28px; }
+    .hero-cta { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+    .price-note { font-size: 13px; color: var(--muted); font-weight: 500; }
+    .hero-visual { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .hero-visual img {
+      width: 100%; max-width: 290px;
+      border-radius: 12px;
+      box-shadow: 0 28px 60px rgba(0,0,0,.24), 0 8px 20px rgba(0,0,0,.12);
+    }
+    .badges { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 290px; }
+    .badge-item {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 14px;
+      font-size: 13px; font-weight: 600; color: var(--black);
+    }
+    .badge-ic {
+      width: 28px; height: 28px; border-radius: 7px;
+      background: var(--gold-lt); display: flex; align-items: center;
+      justify-content: center; font-size: 13px; flex-shrink: 0;
+    }
+
+    /* PAIN */
+    #pain { background: var(--white); }
+    #pain .inner { max-width: 720px; margin: 0 auto; text-align: center; }
+    .sec-h { font-size: clamp(22px, 3.5vw, 34px); font-weight: 800; margin-bottom: 20px; line-height: 1.22; }
+    .dialog {
+      background: var(--cream); border-left: 4px solid var(--gold);
+      border-radius: 0 12px 12px 0; padding: 24px 28px;
+      margin-bottom: 28px; text-align: left;
+    }
+    .dialog p { font-size: 15px; line-height: 1.85; color: #333; }
+    .dialog p + p { margin-top: 10px; }
+    .dialog strong { color: var(--black); font-weight: 700; }
+    .dialog hr { border: none; border-top: 1px solid var(--border); margin: 10px 0; }
+    .pain-cards {
+      display: grid; grid-template-columns: repeat(2,1fr); gap: 12px;
+    }
+    .pain-c {
+      background: var(--cream); border: 1px solid var(--border);
+      border-radius: 12px; padding: 18px 16px;
+      display: flex; align-items: center; gap: 12px; text-align: left;
+    }
+    .pain-ic {
+      width: 36px; height: 36px; border-radius: 9px;
+      background: var(--black); color: #fff; font-size: 16px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .pain-c h4 { font-size: 14px; font-weight: 700; line-height: 1.4; }
+
+    /* WHO */
+    #who { background: var(--gray); }
+    #who .inner { text-align: center; }
+    .who-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 24px;
+    }
+    .who-c {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px 14px;
+    }
+    .who-ic { font-size: 26px; margin-bottom: 10px; display: block; }
+    .who-c h4 { font-size: 14px; font-weight: 700; line-height: 1.4; }
+    .who-note {
+      background: var(--black); color: var(--white);
+      border-radius: 12px; padding: 20px 24px;
+      font-size: 15px; font-weight: 600; line-height: 1.6; max-width: 640px; margin: 0 auto;
+    }
+    .who-note span { color: var(--gold-lt); }
+
+    /* INSIDE */
+    #inside { background: var(--white); }
+    #inside .inner { text-align: center; }
+    .inside-grid {
+      display: grid; grid-template-columns: repeat(2,1fr); gap: 10px;
+      max-width: 780px; margin: 0 auto 40px;
+    }
+    .inside-i {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: var(--cream); border: 1px solid var(--border);
+      border-radius: 11px; padding: 16px 18px;
+      font-size: 14px; font-weight: 600; color: var(--black);
+      line-height: 1.45; text-align: left;
+    }
+    .in-num {
+      min-width: 26px; height: 26px; border-radius: 7px;
+      background: var(--gold-lt); color: var(--black);
+      font-size: 12px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+
+    /* REVIEWS */
+    #reviews { background: var(--gray); }
+    #reviews .inner { text-align: center; }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 12px;
+    }
+    .rv {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 13px; padding: 20px;
+      display: flex; flex-direction: column; gap: 10px; text-align: left;
+    }
+    .rv.feat { border-color: var(--gold); background: #FFFCEE; }
+    .rv-top { display: flex; align-items: center; gap: 10px; }
+    .rv-av {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--black); color: #fff;
+      font-size: 15px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .rv-av.g { background: var(--gold); color: var(--black); }
+    .rv-name { font-size: 14px; font-weight: 700; }
+    .rv-role { font-size: 12px; color: var(--muted); }
+    .rv-stars { color: var(--gold); font-size: 13px; letter-spacing: 1px; }
+    .rv-text { font-size: 14px; color: #333; line-height: 1.68; }
+
+    /* OFFER */
+    #offer { background: var(--cream); }
+    #offer .inner { text-align: center; }
+    .offer-card {
+      background: var(--white); border: 2px solid var(--border);
+      border-radius: 18px; max-width: 500px; margin: 0 auto;
+      padding: 36px 32px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.07);
+    }
+    .offer-card img { max-width: 120px; border-radius: 9px; box-shadow: 0 6px 20px rgba(0,0,0,.14); margin-bottom: 18px; }
+    .offer-card h3 { font-size: 24px; font-weight: 800; margin-bottom: 4px; }
+    .offer-card > p { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+    .offer-rows { margin-bottom: 20px; }
+    .ofr {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0; border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .ofr:last-child { border-bottom: none; }
+    .ofr .k { color: var(--muted); font-weight: 500; }
+    .ofr .v { font-weight: 700; }
+    .offer-price { font-size: 36px; font-weight: 800; margin: 4px 0 20px; }
+    .offer-price span { color: var(--gold); }
+    .offer-note { font-size: 13px; color: var(--muted); margin-top: 12px; line-height: 1.6; }
+
+    /* FAQ */
+    #faq { background: var(--white); }
+    #faq .inner { text-align: center; }
+    .faq-wrap { max-width: 680px; margin: 0 auto; text-align: left; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-q {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 14px; padding: 18px 0; cursor: pointer;
+      font-size: 15px; font-weight: 700; list-style: none; user-select: none;
+    }
+    .faq-q::-webkit-details-marker { display: none; }
+    .faq-tog {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--gray); display: flex; align-items: center;
+      justify-content: center; font-size: 17px; flex-shrink: 0;
+      transition: background .2s, transform .2s;
+    }
+    details[open] .faq-tog { background: var(--gold-lt); transform: rotate(45deg); }
+    .faq-a { padding: 0 0 18px; font-size: 14px; color: #444; line-height: 1.75; }
+
+    /* FINAL CTA */
+    #final { background: var(--black); padding: 90px 0; text-align: center; }
+    #final .label { color: var(--gold); }
+    #final h2 {
+      font-size: clamp(24px, 4vw, 40px); font-weight: 800;
+      color: var(--white); margin-bottom: 16px;
+      letter-spacing: -.8px; max-width: 640px; margin-left: auto; margin-right: auto;
+    }
+    #final h2 em { font-style: normal; color: var(--gold-lt); }
+    #final p {
+      font-size: 16px; color: rgba(255,255,255,.58);
+      max-width: 500px; margin: 0 auto 32px; line-height: 1.7;
+    }
+    #final small {
+      display: block; color: rgba(255,255,255,.38);
+      font-size: 13px; font-weight: 600; margin-top: 14px;
+    }
+    #final small strong { color: var(--gold-lt); }
+
+    /* FOOTER */
+    footer { background: #0A0A0A; padding: 32px 0; border-top: 1px solid #1E1E1E; }
+    .ftr { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
+    .ftr-logo { font-size: 15px; font-weight: 800; color: var(--white); text-decoration: none; }
+    .ftr-logo span { color: var(--gold); }
+    .ftr a { color: rgba(255,255,255,.55); text-decoration: none; font-size: 14px; font-weight: 600; }
+    .ftr a:hover { color: var(--gold); }
+    .ftr small { font-size: 12px; color: rgba(255,255,255,.22); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      section { padding: 56px 0; }
+
+      .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+      .hero-h1 { font-size: 26px; }
+      .hero-cta { align-items: stretch; }
+      .hero-visual { order: 1; }
+      .badges { max-width: 100%; }
+
+      .pain-cards { grid-template-columns: 1fr; }
+      .dialog { border-left: none; border-top: 4px solid var(--gold); border-radius: 12px; }
+
+      .who-grid { grid-template-columns: repeat(2,1fr); }
+
+      .inside-grid { grid-template-columns: 1fr; }
+
+      .reviews-grid { grid-template-columns: 1fr; }
+
+      .offer-card { padding: 28px 18px; }
+    }
+    @media (max-width: 480px) {
+      .who-grid { grid-template-columns: 1fr; }
+      .hero-h1 { font-size: 23px; letter-spacing: -.4px; }
+      #final { padding: 68px 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="container">
+    <a href="#" class="logo">Founders <span>Китоблар</span></a>
+    <a href="https://t.me/m/9T_HwAPZOTJi" target="_blank" class="btn btn-dark" style="padding:10px 18px;font-size:13px;border-radius:9px;">Буюртма бериш →</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;">
+          <span class="badge-warn">⚠ Нусхалар чекланган</span>
+          <span class="badge-trust">★ Раҳбарлар учун</span>
+        </div>
+        <h1 class="hero-h1">
+          Жамоа ишламаяптими… ёки раҳбар ва ходим ўртасидаги
+          <em>кўринмас девор</em>
+          бизнесни ичидан синдиряптими?
+        </h1>
+        <p class="hero-sub">
+          Қора Қути — раҳбар ва ходимлар ўртасидаги ишончсизлик, масъулиятсизлик ва кўринмас бошқарув хатоларини очиб берадиган китоб.
+        </p>
+        <div class="hero-cta">
+          <a href="https://t.me/m/9T_HwAPZOTJi" target="_blank" class="btn btn-gold btn-lg">
+            Қора Қутини буюртма қилиш <span class="arr">→</span>
+          </a>
+          <div class="warn-box" style="max-width:380px;">
+            <span style="font-size:20px;">⚠️</span>
+            <div>
+              <strong>Диққат: нусхалар чекланган</strong>
+              <span>Ҳар партияда тайёрланган нусхалар тугагач буюртма тўхтатилади.</span>
+            </div>
+          </div>
+          <span class="price-note">Нарх: 240 000 сўм · Етказиб бериш нархи жойга қараб</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="https://i.postimg.cc/dVZ83XKN/Ramkalash-Effekti.webp" alt="Қора Қути китоби" />
+        <div class="badges">
+          <div class="badge-item"><div class="badge-ic">💡</div> Ходимлар муаммосини тушуниш</div>
+          <div class="badge-item"><div class="badge-ic">🔍</div> Яширин раҳбарлик хатолари</div>
+          <div class="badge-item"><div class="badge-ic">⚡</div> Жамоада масъулиятни кучайтириш</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section id="pain">
+  <div class="container">
+    <div class="inner">
+      <span class="label">Муаммо</span>
+      <h2 class="sec-h">Муаммо ҳар доим ходимда бўлмаслиги мумкин</h2>
+      <div class="dialog">
+        <p><strong>Раҳбар натижа кутади.</strong><br>Ходим эса нима учун босим бўлаётганини тушунмайди.</p>
+        <hr/>
+        <p><strong>Раҳбар масъулият талаб қилади.</strong><br>Ходим эса ундан нима аниқ кутиляпганини билмайди.</p>
+        <hr/>
+        <p><strong>Раҳбар ходимни дангаса деб ўйлайди.</strong><br>Ходим эса раҳбар уни қадрламаяпти деб ҳис қилади.</p>
+        <hr/>
+        <p style="font-weight:800;font-size:16px;color:#111;">Шу ерда жамоа ичида кўринмас девор пайдо бўлади.</p>
+      </div>
+      <div class="pain-cards">
+        <div class="pain-c"><div class="pain-ic">🔔</div><h4>Ишлар доим эслатмасиз юрмайди</h4></div>
+        <div class="pain-c"><div class="pain-ic">😶</div><h4>Ходимлар ташаббус кўрсатмайди</h4></div>
+        <div class="pain-c"><div class="pain-ic">👁️</div><h4>Раҳбар ҳамма нарсани ўзи назорат қилади</h4></div>
+        <div class="pain-c"><div class="pain-ic">📉</div><h4>Жамоада ишонч ва масъулият пасаяди</h4></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO -->
+<section id="who">
+  <div class="container">
+    <div class="inner">
+      <span class="label">Аудитория</span>
+      <h2 class="sec-h" style="margin-bottom:28px;">Бу китоб кимлар учун?</h2>
+      <div class="who-grid">
+        <div class="who-c"><span class="who-ic">🏢</span><h4>Ходимлари бор бизнес эгалари</h4></div>
+        <div class="who-c"><span class="who-ic">👔</span><h4>Жамоа бошқарадиган раҳбарлар</h4></div>
+        <div class="who-c"><span class="who-ic">📋</span><h4>Менежерлар ва бўлим бошлиқлари</h4></div>
+        <div class="who-c"><span class="who-ic">😓</span><h4>Ходимлар билан муаммодан чарчаганлар</h4></div>
+        <div class="who-c"><span class="who-ic">🔗</span><h4>Бизнеси ўзига боғланиб қолганлар</h4></div>
+        <div class="who-c"><span class="who-ic">🎯</span><h4>Натижани жамоа орқали олмоқчилар</h4></div>
+      </div>
+      <div class="who-note">
+        Агар сизда камида <span>2–3 та ходим</span> бор бўлса ҳам, бу китоб бошқарувга бошқача кўз билан қарашга ёрдам беради.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSIDE -->
+<section id="inside">
+  <div class="container">
+    <div class="inner">
+      <span class="label">Мазмун</span>
+      <h2 class="sec-h" style="margin-bottom:28px;">Китоб ичидан нималарни топасиз?</h2>
+      <div class="inside-grid">
+        <div class="inside-i"><span class="in-num">01</span> Раҳбар ва ходим ўртасидаги кўринмас зиддиятлар</div>
+        <div class="inside-i"><span class="in-num">02</span> Масъулият нега йўқолиши</div>
+        <div class="inside-i"><span class="in-num">03</span> Ходимни совитадиган раҳбарлик хатолари</div>
+        <div class="inside-i"><span class="in-num">04</span> Назорат ва ишонч ўртасидаги мувозанат</div>
+        <div class="inside-i"><span class="in-num">05</span> Тизимсиз бошқарувнинг бизнесга зарари</div>
+        <div class="inside-i"><span class="in-num">06</span> Ходимни алмаштиришдан олдин нимани текшириш керак</div>
+        <div class="inside-i"><span class="in-num">07</span> Жамоада соғлом талабчанлик муҳитини қуриш</div>
+        <div class="inside-i"><span class="in-num">08</span> Раҳбарнинг жамоага боғланиб қолишидан чиқиш</div>
+      </div>
+      <a href="https://t.me/m/9T_HwAPZOTJi" target="_blank" class="btn btn-gold btn-lg">
+        Қора Қутини буюртма қилиш <span class="arr">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="container">
+    <div class="inner">
+      <span class="label">Мижозлар фикри</span>
+      <h2 class="sec-h" style="margin-bottom:28px;">Ўқиганлар нима деди</h2>
+      <div class="reviews-grid">
+
+        <div class="rv feat">
+          <div class="rv-top">
+            <div class="rv-av g">Ж</div>
+            <div><div class="rv-name">Жасурбек Н.</div><div class="rv-role">Тошкент · 12 нафар ходим</div></div>
+          </div>
+          <div class="rv-stars">★★★★★</div>
+          <p class="rv-text">Ростини айтсам, аввал шубҳа билан олдим. «Яна бир мотивация китоби» деб ўйлагандим. Лекин биринчи бобдаёқ тўхтаб қолдим — ўзим ҳақимда ёзилгандек туюлди. Ходимларимни доим айбладим, аслида муаммо бошқа жойда экан.</p>
+        </div>
+
+        <div class="rv">
+          <div class="rv-top">
+            <div class="rv-av">М</div>
+            <div><div class="rv-name">Мадина Х.</div><div class="rv-role">Самарқанд · HR</div></div>
+          </div>
+          <div class="rv-stars">★★★★★</div>
+          <p class="rv-text">Бизда доим бир хил муаммо такрорланарди — янги ходим олдик, 3–4 ойдан кейин у ҳам «сустлашди». Китобни ўқигач тушундим нега. Энди бошқача ёндашяпмиз.</p>
+        </div>
+
+        <div class="rv">
+          <div class="rv-top">
+            <div class="rv-av">Ш</div>
+            <div><div class="rv-name">Шерзод Қ.</div><div class="rv-role">Тошкент · Агентлик эгаси</div></div>
+          </div>
+          <div class="rv-stars">★★★★★</div>
+          <p class="rv-text">Жамоамдаги 2 та ходимни алмаштирмоқчи эдим. Китобни ўқидим — тўхтадим. Ўзимнинг хатоларимни кўрдим. Ҳозир у ходимлар ҳали ишлаяпти ва аввалгидан яхшироқ.</p>
+        </div>
+
+        <div class="rv">
+          <div class="rv-top">
+            <div class="rv-av">О</div>
+            <div><div class="rv-name">Отабек Р.</div><div class="rv-role">Фарғона · Директор</div></div>
+          </div>
+          <div class="rv-stars">★★★★☆</div>
+          <p class="rv-text">Ўқиётганда «бу бизнинг офисда бўлган гап-ку» деган ҳис кетмади. Бир кам жойи — «хўш, энди нима қилай» деган саволга жавоб камроқ. Лекин нимани ўзгартириш кераклигини кўрсатиши ўзи катта нарса.</p>
+        </div>
+
+        <div class="rv">
+          <div class="rv-top">
+            <div class="rv-av">Б</div>
+            <div><div class="rv-name">Бобур Т.</div><div class="rv-role">Наманган · Савдо бошлиғи</div></div>
+          </div>
+          <div class="rv-stars">★★★★★</div>
+          <p class="rv-text">Икки кунда ўқиб тугатдим. Тунда ухлолмадим — шунча йил нотўғри бошқарганимни англаб. Оддий тил, лекин жуда оғир савол беради ўзингга.</p>
+        </div>
+
+        <div class="rv">
+          <div class="rv-top">
+            <div class="rv-av">Х</div>
+            <div><div class="rv-name">Хуршид М.</div><div class="rv-role">Андижон · Қурилиш компанияси</div></div>
+          </div>
+          <div class="rv-stars">★★★★☆</div>
+          <p class="rv-text">240 минг? Арзийдими деб иккиландим. Лекин биринчи бобнинг ўзи олган пулимни қоплади десам муболаға эмас. Усталарим билан муаммом бор эди — энди тушундим асл сабабини.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section id="offer">
+  <div class="container">
+    <div class="inner">
+      <span class="label">Буюртма</span>
+      <h2 class="sec-h" style="margin-bottom:28px;">Қора Қутини буюртма қилинг</h2>
+      <div class="offer-card">
+        <img src="https://i.postimg.cc/dVZ83XKN/Ramkalash-Effekti.webp" alt="Қора Қути" />
+        <h3>Қора Қути</h3>
+        <p>Ходимларни бошқариш · раҳбарлик · жамоада масъулият</p>
+        <div class="offer-rows">
+          <div class="ofr"><span class="k">Формат</span><span class="v">Босма китоб</span></div>
+          <div class="ofr"><span class="k">Буюртма</span><span class="v">Telegram орқали</span></div>
+          <div class="ofr"><span class="k">Етказиб бериш</span><span class="v">✅ Мавжуд (нарх жойга қараб)</span></div>
+        </div>
+        <div class="warn-box" style="margin-bottom:20px;">
+          <span style="font-size:18px;">⚠️</span>
+          <div>
+            <strong>Нусхалар чекланган!</strong>
+            <span>Партия тугагач буюртма тўхтатилади. Кечиктирманг.</span>
+          </div>
+        </div>
+        <div class="offer-price">240 000 <span>сўм</span></div>
+        <a href="https://t.me/m/9T_HwAPZOTJi" target="_blank" class="btn btn-gold btn-lg btn-full">
+          «ҚОРА ҚУТИ» деб ёзиш <span class="arr">→</span>
+        </a>
+        <p class="offer-note">Тугмани босинг — менежер буюртма ва етказиб бериш бўйича маълумот юборади.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="inner">
+      <span class="label">Савол-жавоб</span>
+      <h2 class="sec-h" style="margin-bottom:28px;">Кўп бериладиган саволлар</h2>
+      <div class="faq-wrap">
+        <div class="faq-item">
+          <details>
+            <summary class="faq-q">Бу китоб кимлар учун?<span class="faq-tog">+</span></summary>
+            <div class="faq-a">Ходимлари бор бизнес эгалари, раҳбарлар, менежерлар ва жамоа бошқарадиган инсонлар учун.</div>
+          </details>
+        </div>
+        <div class="faq-item">
+          <details>
+            <summary class="faq-q">Нарх қанча ва қандай тўланади?<span class="faq-tog">+</span></summary>
+            <div class="faq-a">Китоб нархи <strong>240 000 сўм</strong>. Тўлов усули менежер билан боғлангач аниқлаштирилади. Етказиб бериш нархи жойга қараб алоҳида белгиланади.</div>
+          </details>
+        </div>
+        <div class="faq-item">
+          <details>
+            <summary class="faq-q">Қандай буюртма бераман?<span class="faq-tog">+</span></summary>
+            <div class="faq-a">Telegram'га <strong>«ҚОРА ҚУТИ»</strong> деб ёзасиз. Менежер сиз билан боғланиб, буюртмани расмийлаштиради.</div>
+          </details>
+        </div>
+        <div class="faq-item">
+          <details>
+            <summary class="faq-q">Менда жуда кичик жамоа бор, керак бўладими?<span class="faq-tog">+</span></summary>
+            <div class="faq-a">Ҳа. 2–3 та ходим бўлса ҳам, бошқарувдаги муаммолар худди шундай мавжуд. Аксинча, кичик жамоада битта нотўғри нарса ҳаммага таъсир қилади.</div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="final">
+  <div class="container">
+    <span class="label">Ҳаракат вақти</span>
+    <h2>Ходимларни алмаштиришдан олдин,<br>бошқарувдаги <em>«Қора Қути»</em>ни очинг.</h2>
+    <p>Муаммо ҳар доим одамда эмас. Баъзан у тизим, масъулият ва раҳбар-ходим ўртасидаги тушунмовчилик ичида яширинган бўлади.</p>
+    <a href="https://t.me/m/9T_HwAPZOTJi" target="_blank" class="btn btn-white btn-lg">
+      Қора Қутини буюртма қилиш <span class="arr">→</span>
+    </a>
+    <small>Нарх: <strong>240 000 сўм</strong> · Нусхалар чекланган</small>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="ftr">
+      <a href="#" class="ftr-logo">Founders <span>Китоблар</span></a>
+      <a href="tel:+998509555676">+998 (50) 955-56-76</a>
+      <small>© 2026 Founders Китоблар · Барча ҳуқуқлар ҳимояланган</small>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
