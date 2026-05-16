@@ -692,5 +692,85 @@
   </div>
 </footer>
 
+<!-- ─── MODAL ─── -->
+<div id="order-modal" style="display:none; position:fixed; inset:0; z-index:1000; align-items:center; justify-content:center; padding:16px;">
+  <div id="modal-backdrop" style="position:absolute; inset:0; background:rgba(0,0,0,.55); backdrop-filter:blur(4px);"></div>
+  <div style="position:relative; background:#fff; border-radius:20px; max-width:420px; width:100%; padding:32px 28px; box-shadow:0 24px 80px rgba(0,0,0,.25); animation:modalIn .25s ease;">
+    <!-- close -->
+    <button onclick="closeModal()" style="position:absolute; top:14px; right:16px; background:none; border:none; font-size:22px; cursor:pointer; color:#999; line-height:1;">✕</button>
+
+    <!-- book image -->
+    <div style="display:flex; justify-content:center; margin-bottom:20px;">
+      <img src="https://i.postimg.cc/dVZ83XKN/Ramkalash-Effekti.webp" alt="Қора Қути" style="width:130px; border-radius:10px; box-shadow:0 8px 28px rgba(0,0,0,.18);" />
+    </div>
+
+    <!-- info -->
+    <h3 style="font-size:22px; font-weight:800; text-align:center; margin-bottom:6px;">Қора Қути</h3>
+    <p style="font-size:14px; color:#888; text-align:center; margin-bottom:20px;">Ходимларни бошқариш · раҳбарлик · жамоада масъулият</p>
+
+    <div style="background:#FAFAF8; border-radius:12px; padding:16px; margin-bottom:20px; display:flex; flex-direction:column; gap:10px;">
+      <div style="display:flex; justify-content:space-between; font-size:14px; border-bottom:1px solid #E8E8E4; padding-bottom:10px;">
+        <span style="color:#888; font-weight:500;">Нарх</span>
+        <span style="font-weight:800; font-size:16px;">240 000 <span style="color:#D9A400;">сўм</span></span>
+      </div>
+      <div style="display:flex; justify-content:space-between; font-size:14px; border-bottom:1px solid #E8E8E4; padding-bottom:10px;">
+        <span style="color:#888; font-weight:500;">Формат</span>
+        <span style="font-weight:700;">Босма китоб</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; font-size:14px;">
+        <span style="color:#888; font-weight:500;">Етказиб бериш</span>
+        <span style="font-weight:700; text-align:right; max-width:180px; line-height:1.4;">✅ Мавжуд<br><span style="font-size:12px; color:#888; font-weight:500;">(нарх жойга қараб)</span></span>
+      </div>
+    </div>
+
+    <p style="font-size:15px; font-weight:700; text-align:center; margin-bottom:20px; color:#111;">
+      Буюртма беришга тайёрмисиз?
+    </p>
+
+    <!-- actions -->
+    <a href="https://t.me/m/9T_HwAPZOTJi" target="_blank" onclick="closeModal()"
+       style="display:flex; align-items:center; justify-content:center; gap:8px; width:100%; background:linear-gradient(135deg,#F5B800,#D9A400); color:#111; font-family:'Manrope',sans-serif; font-size:16px; font-weight:800; padding:17px; border-radius:13px; text-decoration:none; margin-bottom:10px; box-shadow:0 6px 20px rgba(217,164,0,.4);">
+      Ҳа, буюртма бераман →
+    </a>
+    <button onclick="closeModal()"
+       style="width:100%; background:none; border:1.5px solid #E8E8E4; color:#666; font-family:'Manrope',sans-serif; font-size:14px; font-weight:600; padding:13px; border-radius:13px; cursor:pointer;">
+      Кейинроқ
+    </button>
+  </div>
+</div>
+
+<style>
+  @keyframes modalIn {
+    from { opacity:0; transform:scale(.95) translateY(10px); }
+    to   { opacity:1; transform:scale(1) translateY(0); }
+  }
+</style>
+
+<script>
+  const modal = document.getElementById('order-modal');
+
+  function openModal(e) {
+    e.preventDefault();
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('modal-backdrop').addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // Barcha CTA tugmalarini modal bilan bog'lash
+  document.querySelectorAll('a[href="https://t.me/m/9T_HwAPZOTJi"]').forEach(btn => {
+    // Header va modal ichidagi tugmani o'tkazib yuborish
+    if (btn.closest('#order-modal')) return;
+    btn.addEventListener('click', openModal);
+  });
+</script>
+
 </body>
 </html>
