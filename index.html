@@ -105,36 +105,109 @@
     .warn-box span   { font-size: 13px; color: #7B2020; line-height: 1.5; }
 
     /* HERO */
-    #hero { background: var(--cream); padding: 60px 0 72px; overflow: hidden; }
-    .hero-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 56px; align-items: center;
+    #hero { background: var(--cream); padding: 48px 0 64px; overflow: hidden; }
+    .hero-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+    .hero-img-wrap {
+      display: flex; justify-content: center; margin-bottom: 32px;
+      position: relative;
+      overflow: visible;
+    }
+    .hero-img-wrap img {
+      width: 100%; max-width: 360px;
+      display: block;
+      position: relative; z-index: 1;
+    }
+    /* pastki gradiyent — kesilgan joyni yashiradi */
+    .hero-img-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, var(--cream));
+      z-index: 2;
+      pointer-events: none;
+    }
+    /* dekorativ doiralar */
+    .hero-img-wrap::before {
+      content: '';
+      position: absolute;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,184,0,.13) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+    }
+    .deco-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1.5px solid rgba(217,164,0,.2);
+      z-index: 0;
+    }
+    .deco-ring-1 { width: 420px; height: 420px; top:50%; left:50%; transform:translate(-50%,-50%); }
+    .deco-ring-2 { width: 520px; height: 520px; top:50%; left:50%; transform:translate(-50%,-50%); opacity:.5; }
+    .social-proof-badge {
+      position: absolute;
+      top: 40%;
+      left: -10px;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-lt) 0%, var(--gold) 100%);
+      box-shadow: 0 6px 28px rgba(217,164,0,.45), 0 2px 8px rgba(0,0,0,.12);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 10;
+      padding: 12px;
+      border: 3px solid rgba(255,255,255,.6);
+      outline: 2px dashed rgba(255,255,255,.5);
+      outline-offset: -8px;
+    }
+    .social-proof-badge .sp-num {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--black);
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+    .social-proof-badge .sp-line1 {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1.3;
+      text-transform: uppercase;
+      letter-spacing: .3px;
+    }
+    .social-proof-badge .sp-line2 {
+      font-size: 9px;
+      font-weight: 600;
+      color: rgba(0,0,0,.65);
+      line-height: 1.3;
+      text-transform: uppercase;
+      letter-spacing: .3px;
     }
     .hero-h1 {
-      font-size: clamp(24px, 3.5vw, 42px); font-weight: 800;
-      line-height: 1.18; letter-spacing: -1px; margin-bottom: 18px;
+      font-size: clamp(24px, 4vw, 44px); font-weight: 800;
+      line-height: 1.18; letter-spacing: -1px; margin-bottom: 16px;
     }
     .hero-h1 em { font-style: normal; color: var(--gold); }
     .hero-sub { font-size: 16px; color: #444; line-height: 1.7; margin-bottom: 28px; }
-    .hero-cta { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+    .hero-cta { display: flex; flex-direction: column; align-items: center; gap: 14px; }
     .price-note { font-size: 13px; color: var(--muted); font-weight: 500; }
-    .hero-visual { display: flex; flex-direction: column; align-items: center; gap: 14px; }
-    .hero-visual img {
-      width: 100%; max-width: 290px;
-      border-radius: 12px;
-      box-shadow: 0 28px 60px rgba(0,0,0,.24), 0 8px 20px rgba(0,0,0,.12);
-    }
-    .badges { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 290px; }
+    .badges { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 8px; }
     .badge-item {
-      display: flex; align-items: center; gap: 10px;
+      display: inline-flex; align-items: center; gap: 8px;
       background: var(--white); border: 1px solid var(--border);
-      border-radius: 10px; padding: 10px 14px;
+      border-radius: 100px; padding: 8px 14px;
       font-size: 13px; font-weight: 600; color: var(--black);
     }
     .badge-ic {
-      width: 28px; height: 28px; border-radius: 7px;
+      width: 22px; height: 22px; border-radius: 6px;
       background: var(--gold-lt); display: flex; align-items: center;
-      justify-content: center; font-size: 13px; flex-shrink: 0;
+      justify-content: center; font-size: 12px; flex-shrink: 0;
     }
 
     /* PAIN */
@@ -346,41 +419,46 @@
 <!-- HERO -->
 <section id="hero">
   <div class="container">
-    <div class="hero-grid">
-      <div>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;">
-          <span class="badge-warn">⚠ Нусхалар чекланган</span>
-          <span class="badge-trust">★ Раҳбарлар учун</span>
-        </div>
-        <h1 class="hero-h1">
-          Жамоа ишламаяптими… ёки раҳбар ва ходим ўртасидаги
-          <em>кўринмас девор</em>
-          бизнесни ичидан синдиряптими?
-        </h1>
-        <p class="hero-sub">
-          Қора Қути — раҳбар ва ходимлар ўртасидаги ишончсизлик, масъулиятсизлик ва кўринмас бошқарув хатоларини очиб берадиган китоб.
-        </p>
-        <div class="hero-cta">
-          <a href="https://t.me/m/9T_HwAPZOTJi" target="_blank" class="btn btn-gold btn-lg">
-            Қора Қутини буюртма қилиш <span class="arr">→</span>
-          </a>
-          <div class="warn-box" style="max-width:380px;">
-            <span style="font-size:20px;">⚠️</span>
-            <div>
-              <strong>Диққат: нусхалар чекланган</strong>
-              <span>Ҳар партияда тайёрланган нусхалар тугагач буюртма тўхтатилади.</span>
-            </div>
-          </div>
-          <span class="price-note">Нарх: 240 000 сўм · Етказиб бериш нархи жойга қараб</span>
+    <div class="hero-inner">
+      <div class="hero-img-wrap">
+        <div class="deco-ring deco-ring-1"></div>
+        <div class="deco-ring deco-ring-2"></div>
+        <img src="https://i.postimg.cc/wTnQHHsX/Ramkalash-Effekti-2.webp" alt="Қора Қути китоби" />
+        <div class="social-proof-badge">
+          <div class="sp-num">500+</div>
+          <div class="sp-line1">тадбиркорга</div>
+          <div class="sp-line2">маъқул келди</div>
         </div>
       </div>
-      <div class="hero-visual">
-        <img src="https://i.postimg.cc/dVZ83XKN/Ramkalash-Effekti.webp" alt="Қора Қути китоби" />
-        <div class="badges">
-          <div class="badge-item"><div class="badge-ic">💡</div> Ходимлар муаммосини тушуниш</div>
-          <div class="badge-item"><div class="badge-ic">🔍</div> Яширин раҳбарлик хатолари</div>
-          <div class="badge-item"><div class="badge-ic">⚡</div> Жамоада масъулиятни кучайтириш</div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:16px;">
+        <span class="badge-warn">⚠ Нусхалар чекланган</span>
+        <span class="badge-trust">★ Раҳбарлар учун</span>
+      </div>
+      <h1 class="hero-h1">
+        Жамоа ишламаяптими… ёки раҳбар ва ходим ўртасидаги
+        <em>кўринмас девор</em>
+        бизнесни ичидан синдиряптими?
+      </h1>
+      <p class="hero-sub">
+        Қора Қути — раҳбар ва ходимлар ўртасидаги ишончсизлик, масъулиятсизлик ва кўринмас бошқарув хатоларини очиб берадиган китоб.
+      </p>
+      <div class="hero-cta">
+        <a href="https://t.me/m/9T_HwAPZOTJi" target="_blank" class="btn btn-gold btn-lg">
+          Қора Қутини буюртма қилиш <span class="arr">→</span>
+        </a>
+        <div class="warn-box" style="max-width:420px; text-align:left;">
+          <span style="font-size:20px;">⚠️</span>
+          <div>
+            <strong>Диққат: нусхалар чекланган</strong>
+            <span>Ҳар партияда тайёрланган нусхалар тугагач буюртма тўхтатилади.</span>
+          </div>
         </div>
+        <span class="price-note">Нарх: 240 000 сўм · Етказиб бериш нархи жойга қараб</span>
+      </div>
+      <div class="badges">
+        <div class="badge-item"><div class="badge-ic">💡</div> Ходимлар муаммосини тушуниш</div>
+        <div class="badge-item"><div class="badge-ic">🔍</div> Яширин раҳбарлик хатолари</div>
+        <div class="badge-item"><div class="badge-ic">⚡</div> Жамоада масъулиятни кучайтириш</div>
       </div>
     </div>
   </div>
